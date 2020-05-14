@@ -1,0 +1,109 @@
+.altura {
+  height: 80vh;
+}
+
+.imagem-background {
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url(../assets/images/clients.jpeg) center center / cover;
+  height: 35vh;
+  display: flex;
+  display: center;
+}
+
+.titulo {
+  font-family: "Titillium Web", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 67px;
+  color: #ffffff;
+}
+
+.sub-titulo {
+  font-family: "Titillium Web", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  color: #212529;
+}
+
+.descrição {
+  font-family: "Titillium Web", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 36px;
+  color: #6c757d;
+}
+
+.botao-roxo {
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  font-weight: 600px;
+  color: white;
+  background-color: #6201ee;
+}
+.botao-roxo:hover {
+  opacity: 90%;
+}
+
+.botao-apagar {
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  font-weight: 600px;
+  color: white;
+  background-color: #ff1544;
+}
+.botao-apagar:hover {
+  opacity: 90%;
+}
+
+.botao-salvar {
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  font-weight: 600px;
+  color: white;
+  background-color: #6201ee;
+}
+.botao-salvar:hover {
+  opacity: 85%;
+}
+
+.botao-cancelar {
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  font-weight: 600px;
+  color: white;
+  background-color: #6c757d;
+}
+.botao-cancelar:hover {
+  opacity: 90%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+td {
+  font-size: 14px;
+}
+
+small {
+  color: red;
+  font-weight: 500;
+}
+
+.centro {
+  margin: auto;
+  display: block;
+ }
+
+.font {
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  color: #666666;
+}
