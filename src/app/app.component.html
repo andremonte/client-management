@@ -166,12 +166,12 @@
     <p>form Status: {{ myForm.valid }}</p> -->
   </form>
     <div class="row">
-      <div class="col-6">
-        <button class="px-4 py-2 btn botao-cancelar" (click)="cancelar()">
-          Cancelar <i class="ml-1 fas fa-arrow-circle-left"></i>
+      <div class="col-4">
+        <button class="px-4 py-2 btn botao-cancelar d-flex" (click)="cancelar()">
+          Cancelar <i class="ml-1 fas fa-arrow-circle-left my-auto"></i>
         </button>
       </div>
-      <div class="col-6">
+      <div class="col-8">
         <button class="d-inline float-right ml-2 px-4 py-2 btn botao-salvar" (click)="salvar()" [disabled]="myForm.invalid">
           Salvar <i class="ml-1 far fa-save"></i>
         </button>
