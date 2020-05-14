@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { CepService } from './cep.service';
+import { CepService } from './service/cep.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';@NgModule({
 	declarations: [
 		AppComponent,

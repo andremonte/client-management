@@ -1,8 +1,9 @@
 import { Pessoa } from './models/pessoa.model';
 import { Component } from '@angular/core';
-import { CepService } from './cep.service';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { CepService } from './service/cep.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import isEqual from 'lodash.isequal';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
 	selector: 'app-root',
@@ -82,7 +83,7 @@ export class AppComponent {
 							rua: data.logradouro
 						}
 					})
-				});
+				}, (err)=> alert(err.message));
 			}
 		}
 
@@ -121,8 +122,6 @@ export class AppComponent {
 
 	achaIndex(obj1, obj2) {
 		let resp: Boolean;
-
-
 		for (let i = 0; i < this.pessoas.length; i++) {
 			resp = isEqual(this.pessoas[i], this.myForm.value);
 			if (resp) {
@@ -158,7 +157,7 @@ export class AppComponent {
 			{
 				nome: 'Maria Flores',
 				cpf: '862.771.755-99',
-				telefone: 1533283928,
+				telefone: 6832233336,
 				email: 'maria_f@gmail.com',
 				cep: {
 					cep: '69906-043',
@@ -170,7 +169,7 @@ export class AppComponent {
 			{
 				nome: 'João Carlos',
 				cpf: '030.746.245-58',
-				telefone: 1532841040,
+				telefone: 67813484873,
 				email: 'joao.c@gmail.com',
 				cep: {
 					cep: '79096-766',
@@ -182,7 +181,7 @@ export class AppComponent {
 			{
 				nome: 'Stephanie Dias',
 				cpf: '162.095.623-37',
-				telefone: 1533294040,
+				telefone: 21870392995,
 				email: 'ste.dias@gmail.com',
 				cep: {
 					cep: '23825-080',
@@ -194,7 +193,7 @@ export class AppComponent {
 			{
 				nome: 'Mirtes Souza',
 				cpf: '061.189.231-67',
-				telefone: 1530178756,
+				telefone: 71135677846,
 				email: 'irma.mirtes@gmail.com',
 				cep: {
 					cep: '40420-150',
@@ -206,7 +205,7 @@ export class AppComponent {
 			{
 				nome: 'Marcella Portela',
 				cpf: '114.190.151-09',
-				telefone: 1332577766,
+				telefone: 61111103029,
 				email: 'txela@outlook.com',
 				cep: {
 					cep: '70200-640',
