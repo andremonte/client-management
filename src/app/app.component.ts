@@ -37,7 +37,7 @@ export class AppComponent {
 		//}) 
 
 		this.myForm = this.fb.group({
-			nome: ['', [Validators.required]],
+			nome: ['', [Validators.required, Validators.minLength(3)]],
 			cpf: ['', [Validators.required, Validators.pattern('[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}')]],
 			telefone: ['', [Validators.required, Validators.pattern('[0-9]{11}')]],
 			email: ['', [Validators.email, Validators.required]],

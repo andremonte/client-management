@@ -70,6 +70,8 @@
           class="form-control"
         />
         <mat-error *ngIf="nome_.errors?.required">Por favor preencha o seu nome</mat-error>
+        <mat-error *ngIf="nome_.errors?.minlength">Nome muito pequeno</mat-error>
+
       </mat-form-field>
 
     <mat-form-field class="example-full-width">
