@@ -1,14 +1,12 @@
-# Prova de Angular
+# Client Management
+This is a client management website. I am using Angular Materials, bootstrap, jQuery.
+Everytime a client it is created or modified, and email notification it is shoot.
 
-Trata-se de um teste bem simples, onde temos um CRUD de usuários e queremos vê-lo funcional, organizado e com testes
+## Purpose of project
 
-## O que será avaliado?
+The purpose of this project it's practice Reactive Forms in Angular.
 
-1. Qualidade do seu código
-2. Boas práticas utilizadas
-3. Conceitos de DRY
-4. Prazo
-
-## Como será feita a entrega?
-
-Deverá ser realizado um fork deste repositório e no e-mail enviado você deverá responder com o link deste fork.
+1. Use methods --> Create - Read - Update - Delete.
+2. Service it is used to get Brazilian ZipCode.
+3. Form Builder with errors and validators.
+4. Email notification
