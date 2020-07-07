@@ -15,8 +15,7 @@
       <span class="descrição"
         >Visualize todos os usuário cadastrados em nosso sistema. Aqui é
         possível adicionar, editar e apagar um cliente. Para uma melhor
-        visualização, os campos CPF, CEP e Rua serão omitidos em pequenas
-        telas.
+        visualização, os campos CPF, CEP e Rua serão omitidos em pequenas telas.
       </span>
     </div>
   </div>
@@ -42,17 +41,20 @@
             <td class="d-none d-md-block">{{ pessoa.cpf }}</td>
             <td>{{ pessoa.telefone }}</td>
             <td>{{ pessoa.email }}</td>
-            <td class="d-none d-md-block">{{ pessoa.cep.cep }}</td>
-            <td>{{ pessoa.cep.estado }}</td>
-            <td>{{ pessoa.cep.cidade }}</td>
-            <td class="d-none d-md-block">{{ pessoa.cep.rua }}</td>
+            <td class="d-none d-md-block">{{ pessoa.endereco.cep }}</td>
+            <td>{{ pessoa.endereco.estado }}</td>
+            <td>{{ pessoa.endereco.cidade }}</td>
+            <td class="d-none d-md-block">{{ pessoa.endereco.rua }}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="row">
       <small class="mx-auto my-auto">Clique no contato que deseja editar</small>
-      <button class="float-right px-4 py-2 btn botao-roxo" (click)="adicionarPessoa()">
+      <button
+        class="float-right px-4 py-2 btn botao-roxo"
+        (click)="adicionarPessoa()"
+      >
         Criar usuário <i class="ml-1 fas fa-user-plus"></i>
       </button>
     </div>
@@ -69,115 +71,142 @@
           placeholder="Fulano da Silva"
           class="form-control"
         />
-        <mat-error *ngIf="nome_.errors?.required">Por favor preencha o seu nome</mat-error>
-        <mat-error *ngIf="nome_.errors?.minlength">Nome muito pequeno</mat-error>
-
+        <mat-error *ngIf="nome_.errors?.required"
+          >Por favor preencha o seu nome</mat-error
+        >
+        <mat-error *ngIf="nome_.errors?.minlength"
+          >Nome muito pequeno</mat-error
+        >
       </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>CPF</mat-label>
-      <input
-      type="text"
-      formControlName="cpf"
-      matInput
-      required
-      placeholder="001.904.567-12"
-      class="form-control"
-      />
-      <mat-error *ngIf="cpf_.errors?.required">Por favor preencha seu CPF</mat-error>
-      <mat-error *ngIf="cpf_.errors?.pattern">CPF deve seguir o formato 000.000.000-00</mat-error>
-    </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>CPF</mat-label>
+        <input
+          type="text"
+          formControlName="cpf"
+          matInput
+          required
+          placeholder="001.904.567-12"
+          class="form-control"
+        />
+        <mat-error *ngIf="cpf_.errors?.required"
+          >Por favor preencha seu CPF</mat-error
+        >
+        <mat-error *ngIf="cpf_.errors?.pattern"
+          >CPF deve seguir o formato 000.000.000-00</mat-error
+        >
+      </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>Telefone</mat-label>
-      <input
-        formControlName="telefone"
-        matInput
-        required
-        placeholder="61999999999"
-        class="form-control"
-        type="number"
-      />
-      <mat-error *ngIf="telefone_.errors?.required">Por favor preencha seu telefone</mat-error>
-      <mat-error *ngIf="telefone_.errors?.pattern">Telefone deverá conter 11 dígitos</mat-error>
-    </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Telefone</mat-label>
+        <input
+          formControlName="telefone"
+          matInput
+          required
+          placeholder="61999999999"
+          class="form-control"
+          type="number"
+        />
+        <mat-error *ngIf="telefone_.errors?.required"
+          >Por favor preencha seu telefone</mat-error
+        >
+        <mat-error *ngIf="telefone_.errors?.pattern"
+          >Telefone deverá conter 11 dígitos</mat-error
+        >
+      </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>Email</mat-label>
-      <input
-        formControlName="email"
-        matInput
-        required
-        placeholder="fulano@domino.com.br"
-        class="form-control"
-      />
-      <mat-error *ngIf="email_.errors?.required">O campo e-mail é obrigatório</mat-error>
-      <mat-error *ngIf="email_.errors?.email">Este e-mail é inválido!</mat-error>
-    </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input
+          formControlName="email"
+          matInput
+          required
+          placeholder="fulano@domino.com.br"
+          class="form-control"
+        />
+        <mat-error *ngIf="email_.errors?.required"
+          >O campo e-mail é obrigatório</mat-error
+        >
+        <mat-error *ngIf="email_.errors?.email"
+          >Este e-mail é inválido!</mat-error
+        >
+      </mat-form-field>
 
-    <div formGroupName="cep">
-    <mat-form-field class="example-full-width">
-      <mat-label>CEP</mat-label>
-      <input
-        formControlName="cep"
-        (keyup)="getCep()"
-        matInput
-        required
-        placeholder="59015200"
-        class="form-control"
-      />
-    <mat-error *ngIf="cep_.errors?.required">CEP é obrigatório</mat-error>
-    <mat-error *ngIf="cep_.errors?.pattern">CEP informado é incorreto!</mat-error>
+      <div formGroupName="endereco">
+        <mat-form-field class="example-full-width">
+          <mat-label>CEP</mat-label>
+          <input
+            formControlName="cep"
+            (keyup)="getCep()"
+            matInput
+            required
+            placeholder="59015200"
+            class="form-control"
+          />
+          <mat-error *ngIf="cep_.errors?.required">CEP é obrigatório</mat-error>
+          <mat-error *ngIf="cep_.errors?.pattern"
+            >CEP informado é incorreto!</mat-error
+          >
+        </mat-form-field>
 
-    </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Estado</mat-label>
+          <input
+            formControlName="estado"
+            matInput
+            placeholder="RN"
+            class="form-control"
+            readonly
+          />
+        </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>Estado</mat-label>
-      <input
-        formControlName="estado"
-        matInput
-        placeholder="RN"
-        class="form-control"
-        readonly
-      />
-    </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Cidade</mat-label>
+          <input
+            formControlName="cidade"
+            matInput
+            placeholder="Natal"
+            class="form-control"
+            readonly
+          />
+        </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>Cidade</mat-label>
-      <input
-        formControlName="cidade"
-        matInput
-        placeholder="Natal"
-        class="form-control"
-        readonly
-      />
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <mat-label>Rua</mat-label>
-      <input
-        formControlName="rua"
-        matInput
-        placeholder="Rua Douto João Dutra"
-        class="form-control"
-        readonly
-      />
-    </mat-form-field>
-  </div>
-<!--      <p>form Value: {{ myForm.value | json }}</p>
-    <p>form Status: {{ myForm.valid }}</p> -->
-  </form>
+        <mat-form-field class="example-full-width">
+          <mat-label>Rua</mat-label>
+          <input
+            formControlName="rua"
+            matInput
+            placeholder="Rua Douto João Dutra"
+            class="form-control"
+            readonly
+          />
+        </mat-form-field>
+      </div>
+      <p>form Value: {{ myForm.value | json }}</p>
+      <p>form Status: {{ myForm.valid }}</p>
+    </form>
     <div class="row">
       <div class="col-4">
-        <button class="px-4 py-2 btn botao-cancelar d-flex" (click)="cancelar()">
+        <button
+          class="px-4 py-2 btn botao-cancelar d-flex"
+          (click)="cancelar()"
+        >
           Cancelar <i class="ml-1 fas fa-arrow-circle-left my-auto"></i>
         </button>
       </div>
       <div class="col-8">
-        <button class="d-inline float-right ml-2 px-4 py-2 btn botao-salvar" (click)="salvar()" [disabled]="myForm.invalid">
+        <button
+          class="d-inline float-right ml-2 px-4 py-2 btn botao-salvar"
+          (click)="salvar()"
+          [disabled]="myForm.invalid"
+        >
           Salvar <i class="ml-1 far fa-save"></i>
         </button>
-        <button class="d-inline float-right px-4 py-2 btn botao-apagar" (click)="apagar()" [disabled]="novaPessoa">
+        <button
+          class="d-inline float-right px-4 py-2 btn botao-apagar"
+          (click)="apagar()"
+          [disabled]="novaPessoa"
+        >
           Apagar <i class="ml-1 far fa-trash-alt"></i>
         </button>
       </div>

@@ -8,6 +8,6 @@ export class Pessoa {
       public cpf: string,
       public telefone: number,
       public email: string,
-      public cep: Cep
+      public endereco: Cep
     ) { }
 }

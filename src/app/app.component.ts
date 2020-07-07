@@ -1,3 +1,4 @@
+import { EmailNotificationService } from './service/email-notification.service';
 import { Pessoa } from './models/pessoa.model';
 import { Component } from '@angular/core';
 import { CepService } from './service/cep.service';
@@ -17,7 +18,7 @@ export class AppComponent {
 	novaPessoa: boolean = false;
 	index_: number = null;
 
-	constructor(private fb: FormBuilder, private cepService: CepService) {
+	constructor(private fb: FormBuilder, private cepService: CepService, private emailNotificationService: EmailNotificationService) {
 		this.createForm();
 	}
 
@@ -40,7 +41,7 @@ export class AppComponent {
 			cpf: ['', [Validators.required, Validators.pattern('[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}')]],
 			telefone: ['', [Validators.required, Validators.pattern('[0-9]{11}')]],
 			email: ['', [Validators.email, Validators.required]],
-			cep: this.fb.group({
+			endereco: this.fb.group({
 				cep: ['', [Validators.required, Validators.pattern('[0-9]{5}-?[0-9]{3}')]],
 				estado: ['', [Validators.required]],
 				cidade: ['', [Validators.required]],
@@ -56,33 +57,33 @@ export class AppComponent {
 			cpf: this.pessoas[index].cpf,
 			telefone: this.pessoas[index].telefone,
 			email: this.pessoas[index].email,
-			cep: {
-				cep: this.pessoas[index].cep.cep,
-				estado: this.pessoas[index].cep.estado,
-				cidade: this.pessoas[index].cep.cidade,
-				rua: this.pessoas[index].cep.rua
+			endereco: {
+				cep: this.pessoas[index].endereco.cep,
+				estado: this.pessoas[index].endereco.estado,
+				cidade: this.pessoas[index].endereco.cidade,
+				rua: this.pessoas[index].endereco.rua
 			}
 		})
 		this.achaIndex(this.pessoas, this.myForm.value);
 	}
 
 	getCep() {
-		if(this.myForm.value.cep.cep > 0) {
-			if (this.myForm.value.cep.cep.includes('-')) {
-				this.myForm.value.cep.cep = this.myForm.value.cep.cep.replace('-', '');
+		if (this.myForm.value.endereco.cep > 0) {
+			if (this.myForm.value.endereco.cep.includes('-')) {
+				this.myForm.value.endereco.cep = this.myForm.value.endereco.cep.replace('-', '');
 			}
-	
-			if (this.myForm.value.cep.cep.length === 8 || this.myForm.value.cep.cep.length === 9) {
-				this.cepService.getCep(this.myForm.value.cep.cep).subscribe(data => {
+
+			if (this.myForm.value.endereco.cep.length === 8 || this.myForm.value.endereco.cep.length === 9) {
+				this.cepService.getCep(this.myForm.value.endereco.cep).subscribe(data => {
 					this.myForm.patchValue({
-						cep: {
+						endereco: {
 							cep: data.cep,
 							estado: data.uf,
 							cidade: data.localidade,
 							rua: data.logradouro
 						}
 					})
-				}, (err)=> alert(err.message));
+				}, (err) => alert(err.message));
 			}
 		}
 
@@ -102,12 +103,17 @@ export class AppComponent {
 		if (this.novaPessoa) {
 			this.pessoas.push(this.myForm.value);
 			this.novaPessoa = false;
+			this.emailNotificationService.sendContactForm(this.myForm.value.nome, this.myForm.value.email, "Person Added", "A New Person was added into the System");
+
 		}
 		//modifying existing people.
 		else {
 			console.log(this.index_);
 			this.pessoas[this.index_] = this.myForm.value;
+			this.emailNotificationService.sendContactForm(this.myForm.value.nome, this.myForm.value.email, "Person Modified", "A Person was modified into the System");
+
 		}
+
 		this.editando = false;
 		this.index_ = null;
 		this.myForm.reset();
@@ -142,7 +148,7 @@ export class AppComponent {
 		return this.myForm.get('email');
 	}
 	get cep_() {
-		return this.myForm.get('cep.cep');
+		return this.myForm.get('endereco');
 	}
 
 	adicionarPessoa() {
@@ -156,9 +162,9 @@ export class AppComponent {
 			{
 				nome: 'Maria Flores',
 				cpf: '862.771.755-99',
-				telefone: 6832233336,
+				telefone: 68322333361,
 				email: 'maria_f@gmail.com',
-				cep: {
+				endereco: {
 					cep: '69906-043',
 					estado: 'AC',
 					cidade: 'Rio Branco',
@@ -168,9 +174,9 @@ export class AppComponent {
 			{
 				nome: 'João Carlos',
 				cpf: '030.746.245-58',
-				telefone: 67813484873,
+				telefone: 678134848732,
 				email: 'joao.c@gmail.com',
-				cep: {
+				endereco: {
 					cep: '79096-766',
 					estado: 'MS',
 					cidade: 'Campo Grande',
@@ -180,9 +186,9 @@ export class AppComponent {
 			{
 				nome: 'Stephanie Dias',
 				cpf: '162.095.623-37',
-				telefone: 21870392995,
+				telefone: 218703929953,
 				email: 'ste.dias@gmail.com',
-				cep: {
+				endereco: {
 					cep: '23825-080',
 					estado: 'RJ',
 					cidade: 'Itaguaí',
@@ -192,9 +198,9 @@ export class AppComponent {
 			{
 				nome: 'Mirtes Souza',
 				cpf: '061.189.231-67',
-				telefone: 71135677846,
+				telefone: 711356778464,
 				email: 'irma.mirtes@gmail.com',
-				cep: {
+				endereco: {
 					cep: '40420-150',
 					estado: 'BA',
 					cidade: 'Salvador',
@@ -204,9 +210,9 @@ export class AppComponent {
 			{
 				nome: 'Marcella Portela',
 				cpf: '114.190.151-09',
-				telefone: 61111103029,
+				telefone: 611111030295,
 				email: 'txela@outlook.com',
-				cep: {
+				endereco: {
 					cep: '70200-640',
 					estado: 'DF',
 					cidade: 'Brasília',
