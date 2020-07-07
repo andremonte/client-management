@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { CepService } from './service/cep.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import isEqual from 'lodash.isequal';
-import { error } from '@angular/compiler/src/util';
 
 @Component({
 	selector: 'app-root',
